@@ -1,0 +1,829 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#070912">
+<title>ABOK — Digital Experience</title>
+
+<style>
+:root {
+  --bg:#070912;
+  --cyan:#76f5ef;
+  --violet:#9b83ff;
+  --text:#f4f6ff;
+  --muted:#9ba5c1;
+}
+
+* {
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html {
+  scroll-behavior:smooth;
+}
+
+body {
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,sans-serif;
+  overflow-x:hidden;
+}
+
+body::before {
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  background:
+    radial-gradient(ellipse at 15% 20%,#263c77 0%,transparent 35%),
+    radial-gradient(ellipse at 85% 40%,#39215e 0%,transparent 35%),
+    #070912;
+}
+
+#stars {
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+}
+
+.container {
+  width:min(1150px,90%);
+  margin:auto;
+}
+
+/* NAVIGATION */
+
+nav {
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:rgba(7,9,18,.8);
+  backdrop-filter:blur(15px);
+  border-bottom:1px solid #ffffff18;
+}
+
+.nav-inner {
+  height:75px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo {
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:7px;
+}
+
+.logo span {
+  color:var(--cyan);
+}
+
+.nav-links {
+  display:flex;
+  gap:28px;
+}
+
+.nav-links a {
+  color:var(--muted);
+  text-decoration:none;
+  font-size:14px;
+  transition:.3s;
+}
+
+.nav-links a:hover {
+  color:var(--cyan);
+}
+
+/* BUTTONS */
+
+.btn {
+  display:inline-block;
+  padding:14px 22px;
+  border-radius:40px;
+  border:1px solid #76f5ef80;
+  color:white;
+  text-decoration:none;
+  transition:.3s;
+}
+
+.btn:hover {
+  transform:translateY(-4px);
+  box-shadow:0 0 25px #76f5ef44;
+}
+
+.primary {
+  background:linear-gradient(100deg,var(--cyan),var(--violet));
+  color:#080b16;
+  border:none;
+  font-weight:bold;
+}
+
+/* HERO */
+
+.hero {
+  min-height:680px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  gap:30px;
+  padding:70px 0;
+}
+
+.eyebrow {
+  color:var(--cyan);
+  font-size:12px;
+  letter-spacing:4px;
+  font-weight:bold;
+  text-transform:uppercase;
+}
+
+h1 {
+  font-size:clamp(75px,12vw,145px);
+  line-height:.85;
+  letter-spacing:-10px;
+  margin:25px 0;
+}
+
+.outline {
+  color:transparent;
+  -webkit-text-stroke:1px white;
+}
+
+.hero p {
+  color:var(--muted);
+  font-size:17px;
+  line-height:1.8;
+  max-width:480px;
+}
+
+.hero-actions {
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+  margin-top:30px;
+}
+
+/* 3D PLANET */
+
+.planet-stage {
+  min-height:440px;
+  display:grid;
+  place-items:center;
+  position:relative;
+  perspective:1000px;
+}
+
+.glow {
+  position:absolute;
+  width:320px;
+  height:320px;
+  background:#6255ff;
+  filter:blur(100px);
+  opacity:.35;
+}
+
+.planet {
+  width:min(320px,75vw);
+  aspect-ratio:1;
+  border-radius:50%;
+  position:relative;
+  background:
+    radial-gradient(circle at 30% 25%,white,transparent 4%),
+    radial-gradient(circle at 32% 30%,#a7fbff,#4d8cbf 18%,#292c75 45%,#080b18 75%);
+  box-shadow:
+    inset -30px -35px 55px #000,
+    inset 15px 15px 35px #ffffff44,
+    0 0 80px #687aff55;
+  animation:float 7s ease-in-out infinite;
+}
+
+.planet::before,
+.planet::after {
+  content:"";
+  position:absolute;
+  inset:15% -15%;
+  border:1px solid #76f5ef99;
+  border-radius:50%;
+  transform:rotate(-25deg) rotateX(68deg);
+}
+
+.planet::after {
+  inset:22% -22%;
+  border-color:#9b83ff99;
+  transform:rotate(38deg) rotateX(72deg);
+}
+
+@keyframes float {
+  0%,100% {
+    transform:translateY(0) rotate(-5deg);
+  }
+  50% {
+    transform:translateY(-20px) rotate(5deg);
+  }
+}
+
+.tag {
+  position:absolute;
+  padding:12px 16px;
+  background:#11172acc;
+  border:1px solid #ffffff25;
+  border-radius:12px;
+  backdrop-filter:blur(15px);
+  font-size:12px;
+}
+
+.tag1 {
+  top:15%;
+  left:0;
+}
+
+.tag2 {
+  bottom:15%;
+  right:0;
+}
+
+/* SECTIONS */
+
+section {
+  padding:85px 0;
+}
+
+.section-title {
+  font-size:clamp(35px,5vw,58px);
+  margin:15px 0 35px;
+  letter-spacing:-3px;
+}
+
+.section-desc {
+  color:var(--muted);
+  line-height:1.7;
+  margin-bottom:30px;
+}
+
+/* PROJECTS */
+
+.projects {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.card {
+  padding:20px;
+  border:1px solid #ffffff20;
+  border-radius:20px;
+  background:linear-gradient(145deg,#19223e,#0b0e1b);
+  transition:.35s;
+  overflow:hidden;
+}
+
+.card:hover {
+  transform:translateY(-10px);
+  border-color:var(--cyan);
+  box-shadow:0 15px 40px #76f5ef15;
+}
+
+.project-image {
+  height:160px;
+  border-radius:13px;
+  display:grid;
+  place-items:center;
+  margin-bottom:20px;
+  font-size:32px;
+  font-weight:900;
+  text-align:center;
+}
+
+.cafe {
+  background:linear-gradient(135deg,#a76a48,#292039);
+}
+
+.event {
+  background:linear-gradient(135deg,#9a784d,#30203d);
+}
+
+.portfolio {
+  background:linear-gradient(135deg,#176c85,#27234d);
+}
+
+.card small {
+  color:var(--cyan);
+  letter-spacing:2px;
+}
+
+.card h3 {
+  margin:12px 0;
+  font-size:22px;
+}
+
+.card p {
+  color:var(--muted);
+  line-height:1.7;
+  font-size:14px;
+}
+
+/* ABOUT */
+
+.about-box {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:35px;
+  align-items:center;
+  padding:35px;
+  border:1px solid #ffffff20;
+  border-radius:25px;
+  background:#11172acc;
+}
+
+.about-logo {
+  min-height:230px;
+  display:grid;
+  place-items:center;
+  border-radius:20px;
+  background:radial-gradient(circle,#76f5ef33,transparent 65%);
+  font-size:75px;
+  font-weight:900;
+  letter-spacing:-8px;
+}
+
+.about-text {
+  color:var(--muted);
+  line-height:1.9;
+}
+
+/* SERVICES */
+
+.services {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.service {
+  padding:25px;
+  background:#11172acc;
+  border:1px solid #ffffff20;
+  border-radius:18px;
+  transition:.3s;
+}
+
+.service:hover {
+  border-color:var(--violet);
+  transform:translateY(-6px);
+}
+
+.service h3 {
+  margin:15px 0;
+}
+
+.service p {
+  color:var(--muted);
+  line-height:1.7;
+  font-size:14px;
+}
+
+/* CONTACT */
+
+.contact {
+  text-align:center;
+  padding:65px 25px;
+  border-radius:25px;
+  border:1px solid #ffffff20;
+  background:radial-gradient(ellipse at center top,#76f5ef22,transparent 70%),#11172acc;
+}
+
+.contact p {
+  color:var(--muted);
+  margin:20px 0 30px;
+  line-height:1.7;
+}
+
+footer {
+  padding:35px 0;
+  display:flex;
+  justify-content:space-between;
+  color:#77819c;
+  font-size:13px;
+}
+
+/* ANIMATIONS */
+
+.reveal {
+  opacity:0;
+  transform:translateY(25px);
+  transition:.8s;
+}
+
+.reveal.visible {
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* MOBILE */
+
+@media(max-width:800px) {
+  .hero {
+    grid-template-columns:1fr;
+  }
+
+  .planet-stage {
+    min-height:340px;
+  }
+
+  .planet {
+    width:250px;
+  }
+
+  .projects,
+  .services {
+    grid-template-columns:1fr 1fr;
+  }
+
+  .about-box {
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:520px) {
+  .nav-links {
+    gap:12px;
+  }
+
+  .nav-links a:not(:last-child) {
+    display:none;
+  }
+
+  h1 {
+    font-size:85px;
+  }
+
+  .projects,
+  .services {
+    grid-template-columns:1fr;
+  }
+
+  .about-box {
+    padding:20px;
+  }
+
+  footer {
+    flex-direction:column;
+    gap:12px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    animation:none!important;
+    transition:none!important;
+    scroll-behavior:auto!important;
+  }
+
+  .reveal {
+    opacity:1;
+    transform:none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+
+<nav>
+  <div class="container nav-inner">
+    <a href="#home" class="logo">ABOK<span>.</span></a>
+
+    <div class="nav-links">
+      <a href="#work">Работы</a>
+      <a href="#about">Обо мне</a>
+      <a href="#services">Услуги</a>
+      <a href="#contact">Контакты</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<!-- HERO -->
+
+<header class="container hero" id="home">
+
+  <div>
+    <div class="eyebrow">Independent Web Creator</div>
+
+    <h1>
+      MAKE<br>
+      <span class="outline">IT</span><br>
+      FEEL.
+    </h1>
+
+    <p>
+      Я ABOK. Создаю современные сайты
+      с характером — от первых идей
+      до красивого цифрового результата.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#work" class="btn primary">
+        Смотреть работы ↘
+      </a>
+
+      <a href="#about" class="btn">
+        Обо мне
+      </a>
+    </div>
+  </div>
+
+  <div class="planet-stage">
+    <div class="glow"></div>
+    <div class="planet"></div>
+
+    <div class="tag tag1">✦ DIGITAL DESIGN</div>
+    <div class="tag tag2">HTML · CSS · JS</div>
+  </div>
+
+</header>
+
+<!-- PROJECTS -->
+
+<section class="container" id="work">
+
+  <div class="eyebrow">Selected Concepts / 01</div>
+
+  <h2 class="section-title">
+    Избранные работы<span style="color:#76f5ef">.</span>
+  </h2>
+
+  <p class="section-desc">
+    Мои проекты и дизайнерские концепции.
+    Здесь будут появляться новые работы.
+  </p>
+
+  <div class="projects">
+
+    <article class="card reveal">
+      <div class="project-image cafe">
+        NOIR<br>CAFÉ
+      </div>
+
+      <small>CONCEPT 01</small>
+      <h3>Сайт кафе</h3>
+
+      <p>
+        Современный сайт кафе
+        с меню, фотографиями и контактами.
+      </p>
+    </article>
+
+    <article class="card reveal">
+      <div class="project-image event">
+        THE<br>EVENT
+      </div>
+
+      <small>CONCEPT 02</small>
+      <h3>Сайт-приглашение</h3>
+
+      <p>
+        Элегантное цифровое приглашение
+        для особенных событий.
+      </p>
+    </article>
+
+    <article class="card reveal">
+      <div class="project-image portfolio">
+        YOUR<br>SPACE
+      </div>
+
+      <small>CONCEPT 03</small>
+      <h3>Сайт-визитка</h3>
+
+      <p>
+        Стильная презентация человека,
+        проекта или бренда.
+      </p>
+    </article>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+
+<section class="container" id="about">
+
+  <div class="about-box reveal">
+
+    <div class="about-logo">
+      ABOK<span style="color:#76f5ef">.</span>
+    </div>
+
+    <div>
+      <div class="eyebrow">About Me / 02</div>
+
+      <h2 class="section-title">
+        Не шаблон.<br>
+        Свой подход.
+      </h2>
+
+      <p class="about-text">
+        Я начинающий веб-разработчик.
+        Изучаю HTML, CSS и JavaScript.
+        Создаю адаптивные сайты и постоянно
+        улучшаю свои навыки.
+
+        Моя цель — превращать идеи
+        в красивые и удобные сайты.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- SERVICES -->
+
+<section class="container" id="services">
+
+  <div class="eyebrow">What I Create / 03</div>
+
+  <h2 class="section-title">
+    Мои услуги<span style="color:#76f5ef">.</span>
+  </h2>
+
+  <div class="services">
+
+    <div class="service reveal">
+      <div class="eyebrow">01 / WEB</div>
+      <h3>Сайты-визитки</h3>
+      <p>
+        Современная презентация
+        человека или бизнеса.
+      </p>
+    </div>
+
+    <div class="service reveal">
+      <div class="eyebrow">02 / EVENT</div>
+      <h3>Сайты-приглашения</h3>
+      <p>
+        Красивые цифровые приглашения
+        для праздников и мероприятий.
+      </p>
+    </div>
+
+    <div class="service reveal">
+      <div class="eyebrow">03 / LANDING</div>
+      <h3>Landing Pages</h3>
+      <p>
+        Одностраничные сайты
+        для товаров, услуг и проектов.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+
+<section class="container" id="contact">
+
+  <div class="contact reveal">
+
+    <div class="eyebrow">Have an idea? / 04</div>
+
+    <h2 class="section-title">
+      Давай создадим<br>
+      что-то классное.
+    </h2>
+
+    <p>
+      Есть идея для сайта?
+      Напиши мне — обсудим проект.
+    </p>
+
+    <!-- ЗАМЕНИ EMAIL НА СВОЮ РАБОЧУЮ ПОЧТУ -->
+    <a
+      href="mailto:YOUR_EMAIL@example.com?subject=Заказ%20сайта"
+      class="btn primary">
+      Написать мне ↗
+    </a>
+
+  </div>
+</section>
+
+</main>
+
+<footer class="container">
+  <span>© <span id="year"></span> ABOK</span>
+  <span>Designed with curiosity ✦</span>
+</footer>
+
+<script>
+
+/* STAR BACKGROUND */
+
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+
+let stars = [];
+
+function resize() {
+
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+
+  canvas.width = innerWidth * dpr;
+  canvas.height = innerHeight * dpr;
+
+  canvas.style.width = innerWidth + "px";
+  canvas.style.height = innerHeight + "px";
+
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  stars = Array.from(
+    {length: Math.min(110, Math.floor(innerWidth / 8))},
+    () => ({
+      x: Math.random() * innerWidth,
+      y: Math.random() * innerHeight,
+      r: Math.random() * 1.3 + .2,
+      speed: Math.random() * .2 + .03,
+      alpha: Math.random() * .6 + .2
+    })
+  );
+}
+
+function animateStars() {
+
+  ctx.clearRect(0, 0, innerWidth, innerHeight);
+
+  stars.forEach(star => {
+
+    star.y += star.speed;
+
+    if (star.y > innerHeight) {
+      star.y = 0;
+      star.x = Math.random() * innerWidth;
+    }
+
+    ctx.beginPath();
+
+    ctx.arc(
+      star.x,
+      star.y,
+      star.r,
+      0,
+      Math.PI * 2
+    );
+
+    ctx.fillStyle =
+      `rgba(190,220,255,${star.alpha})`;
+
+    ctx.fill();
+
+  });
+
+  requestAnimationFrame(animateStars);
+}
+
+resize();
+animateStars();
+
+window.addEventListener("resize", resize);
+
+
+/* SCROLL ANIMATIONS */
+
+const observer = new IntersectionObserver(entries => {
+
+  entries.forEach(entry => {
+
+    if (entry.isIntersecting) {
+
+      entry.target.classList.add("visible");
+
+      observer.unobserve(entry.target);
+
+    }
+
+  });
+
+}, {threshold:0.12});
+
+document.querySelectorAll(".reveal").forEach(element => {
+  observer.observe(element);
+});
+
+
+/* CURRENT YEAR */
+
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+</script>
+
+</body>
+</html>
